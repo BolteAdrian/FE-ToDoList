@@ -1,0 +1,170 @@
+<div class="container">
+  <h1>Create New Post</h1>
+
+  <a href="#" routerLink="/task/index" class="btn btn-primary">Back</a>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input
+        formControlName="title"
+        id="title"
+        type="text"
+        class="form-control"
+      />
+      <div
+        *ngIf="f['title'].touched && f['title'].invalid"
+        class="alert alert-danger"
+      >
+        <div *ngIf="f['title'].errors && f['title'].errors['required']">
+          Title is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="objective">Objective</label>
+      <textarea
+        formControlName="objective"
+        id="objective"
+        type="text"
+        class="form-control"
+      >
+      </textarea>
+      <div
+        *ngIf="f['objective'].touched && f['objective'].invalid"
+        class="alert alert-danger"
+      >
+        <div *ngIf="f['objective'].errors && f['objective'].errors['required']">
+          objective is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea
+        formControlName="description"
+        id="description"
+        type="text"
+        class="form-control"
+      >
+      </textarea>
+      <div
+        *ngIf="f['description'].touched && f['description'].invalid"
+        class="alert alert-danger"
+      >
+        <div
+          *ngIf="f['description'].errors && f['description'].errors['required']"
+        >
+          description is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="startDate">Start date</label>
+      <input
+        formControlName="startDate"
+        id="startDate"
+        type="date"
+        
+      />
+
+      <div
+        *ngIf="f['startDate'].touched && f['startDate'].invalid"
+        class="alert alert-danger"
+      >
+        <div *ngIf="f['startDate'].errors && f['startDate'].errors['required']">
+          Start date is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="endDate">End date</label>
+      <input
+        formControlName="endDate"
+        id="endDate"
+        type="date"
+       
+      />
+
+      <div
+        *ngIf="f['endDate'].touched && f['endDate'].invalid"
+        class="alert alert-danger"
+      >
+        <div *ngIf="f['endDate'].errors && f['endDate'].errors['required']">
+          End date is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="checked">Checked</label>
+      <input
+        formControlName="checked"
+        id="checked"
+        type="checkbox"
+        
+      />
+
+      <div
+        *ngIf="f['checked'].touched && f['checked'].invalid"
+        class="alert alert-danger"
+      >
+        <div *ngIf="f['checked'].errors && f['checked'].errors['required']">
+          Checked is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="priority">Priority</label>
+      <input
+        formControlName="priority"
+        id="priority"
+        type="range"
+        min="1"
+        max="10"
+        class="form-control"
+      />
+
+      <div
+        *ngIf="f['priority'].touched && f['priority'].invalid"
+        class="alert alert-danger"
+      >
+        <div *ngIf="f['priority'].errors && f['priority'].errors['required']">
+          priority is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="assignedUser">Assigned user</label>
+      <input
+        formControlName="assignedUser"
+        id="assignedUser"
+        type="text"
+        class="form-control"
+      />
+
+      <div
+        *ngIf="f['assignedUser'].touched && f['assignedUser'].invalid"
+        class="alert alert-danger"
+      >
+        <div
+          *ngIf="
+            f['assignedUser'].errors && f['assignedUser'].errors['required']
+          "
+        >
+          Assigned user is required.
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" type="submit" [disabled]="!form.valid">
+      Submit
+    </button>
+  </form>
+</div>
