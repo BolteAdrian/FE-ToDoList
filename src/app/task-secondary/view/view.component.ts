@@ -20,9 +20,7 @@ export class ViewComponent implements OnInit {
   --------------------------------------------*/
   constructor(
     public taskSecondaryService: TaskSecondaryService,
-    private route: ActivatedRoute,
     private dialogRef: MatDialogRef<ViewComponent>,
-    private router: Router,
     @Inject(MAT_DIALOG_DATA) public editData: any
   ) {}
 

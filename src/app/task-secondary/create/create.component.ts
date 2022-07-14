@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { TaskSecondaryService } from '../task-secondary.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
@@ -10,13 +13,20 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class CreateComponent implements OnInit {
   form!: FormGroup;
+  id!: any;
 
   /*------------------------------------------
   --------------------------------------------
   Created constructor
   --------------------------------------------
   --------------------------------------------*/
-  constructor(public taskSecondaryService: TaskSecondaryService, private router: Router,private dialogRef: MatDialogRef<CreateComponent>) {}
+  constructor(
+    public taskSecondaryService: TaskSecondaryService,
+    @Inject(MAT_DIALOG_DATA) public editData: any,
+    private router: Router,
+    private route: ActivatedRoute,
+    private dialogRef: MatDialogRef<CreateComponent>
+  ) {}
 
   /**
    * Write code on Method
@@ -24,9 +34,12 @@ export class CreateComponent implements OnInit {
    * @return response()
    */
   ngOnInit(): void {
+    const str = location.href;
+    const last = str.charAt(str.length - 1);
+
     this.form = new FormGroup({
       title: new FormControl('', [Validators.required]),
-      principalTaskId: new FormControl('', [Validators.required]),
+      principalTaskId: new FormControl(Number(last), [Validators.required]),
       objective: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
       startDate: new FormControl('', [Validators.required]),
@@ -52,10 +65,9 @@ export class CreateComponent implements OnInit {
    * @return response()
    */
 
-   closeDialog(){
+  closeDialog() {
     this.dialogRef.close();
   }
-
 
   submit() {
     console.log(this.form.value);
@@ -63,7 +75,7 @@ export class CreateComponent implements OnInit {
       console.log('Post created successfully!');
       this.form.reset();
       this.dialogRef.close();
-      window. location. reload();
+      window.location.reload();
     });
   }
 }

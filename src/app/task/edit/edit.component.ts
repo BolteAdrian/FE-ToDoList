@@ -22,9 +22,7 @@ export class EditComponent implements OnInit {
   --------------------------------------------*/
   constructor(
     public taskService: TaskService,
-    private route: ActivatedRoute,
     private dialogRef: MatDialogRef<EditComponent>,
-    private router: Router,
     @Inject(MAT_DIALOG_DATA) public editData: any
   ) {}
 
