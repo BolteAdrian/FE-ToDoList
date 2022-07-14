@@ -1,60 +1,51 @@
 <div class="container">
   <h1>To do list</h1>
 
-  <a href="#" routerLink="/task/create/" class="btn btn-success"
-    >Create New task</a
-  >
+  <button class="btn btn-success" mat-button (click)="openDialog()">
+    Add new task
+  </button>
 
   <table class="table table-bordered">
-    <thead class="black white-text">
-      <tr>
-        <td>Id</td>
-        <td>Title</td>
-        <td>Objective</td>
-        <td>Description</td>
-        <td>StartDate</td>
-        <td>EndDate</td>
-        <td>Checked</td>
-        <td>Priority</td>
-        <td>AssignedUser</td>
-        <th width="220px">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let task of tasks">
-        <td>{{ task.id }}</td>
-        <td><a href="#" routerLink="/task-secondary/{{task.id}}" >
+    <tr
+      *ngFor="let task of tasks"
+      [ngStyle]="{
+        'background-color': task.checked === true ? 'green' : 'red'
+      }"
+    >
+      <td>
+        <a href="#" routerLink="/task-secondary/{{ task.id }}">
           <p>{{ task.title }}</p></a
-        ></td>
-        <td>{{ task.objective }}</td>
-        <td>{{ task.description }}</td>
-        <td>{{ task.startDate }}</td>
-        <td>{{ task.endDate }}</td>
-        <td>{{ task.checked }}</td>
-        <td>{{ task.priority }}</td>
-        <td>{{ task.assignedUser }}</td>
-        <td>
-          <a
-            href="#"
-            [routerLink]="['/task/', task.id, 'view']"
-            class="btn btn-info"
-            >View</a
-          >
-          <a
-            href="#"
-            [routerLink]="['/task/', task.id, 'edit']"
-            class="btn btn-primary"
-            >Edit</a
-          >
-          <button
-            type="button"
-            (click)="deletePost(task.id)"
-            class="btn btn-danger"
-          >
-            Delete
-          </button>
-        </td>
-      </tr>
-    </tbody>
+        >
+      </td>
+      <td>{{ task.objective }}</td>
+      <td>{{ task.description }}</td>
+      <td>{{ task.startDate }}</td>
+      <td>{{ task.endDate }}</td>
+      <td>{{ task.assignedUser }}</td>
+      <td>
+        <button
+          mat-button
+          (click)="openDetailsDialog(task)"
+          class="btn btn-info"
+        >
+          Details
+        </button>
+        <button
+          mat-button
+          (click)="openEditDialog(task)"
+          class="btn btn-primary"
+        >
+          Edit
+        </button>
+
+        <button
+          type="button"
+          (click)="deletePost(task.id)"
+          class="btn btn-danger"
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
   </table>
 </div>

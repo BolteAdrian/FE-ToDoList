@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { TaskService } from '../task.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Task } from '../task';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-view',
@@ -20,7 +21,9 @@ export class ViewComponent implements OnInit {
   constructor(
     public taskService: TaskService,
     private route: ActivatedRoute,
-    private router: Router
+    private dialogRef: MatDialogRef<ViewComponent>,
+    private router: Router,
+    @Inject(MAT_DIALOG_DATA) public editData: any
   ) {}
 
   /**
@@ -29,10 +32,18 @@ export class ViewComponent implements OnInit {
    * @return response()
    */
   ngOnInit(): void {
-    this.id = this.route.snapshot.params['taskId'];
+   
 
+    this.id = this.editData.id;
     this.taskService.find(this.id).subscribe((data: Task) => {
       this.task = data;
     });
+
   }
+
+  
+  closeDialog() {
+    this.dialogRef.close();
+  }
+
 }

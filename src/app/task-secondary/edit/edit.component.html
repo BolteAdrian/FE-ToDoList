@@ -1,7 +1,5 @@
 <div class="container">
-    <h1>Update Post</h1>
-  
-    <a href="#" routerLink="/task-secondary/index" class="btn btn-primary">Back</a>
+    <h1>Update Task</h1> 
   
     <form [formGroup]="form" (ngSubmit)="submit()">
       <div class="form-group">
@@ -190,6 +188,9 @@
         </div>
       </div>
   
+      <button type="button"class="btn btn-danger" md-raised-button (click)="closeDialog()">
+        Cancel
+      </button>
       <button class="btn btn-primary" type="submit" [disabled]="!form.valid">
         Update
       </button>

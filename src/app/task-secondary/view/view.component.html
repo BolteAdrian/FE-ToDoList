@@ -1,9 +1,5 @@
 <div class="container">
-  <h1>View Post</h1>
-
-  <a href="#" routerLink="/task-secondary/index" class="btn btn-primary"
-    >Back</a
-  >
+  <h1>View Task</h1>
 
   <div>
     <strong>ID:</strong>
@@ -56,4 +52,12 @@
     <strong>Assigned user:</strong>
     <p>{{ taskSecondary.assignedUser }}</p>
   </div>
+  <button
+    type="button"
+    class="btn btn-danger"
+    md-raised-button
+    (click)="closeDialog()"
+  >
+    Cancel
+  </button>
 </div>

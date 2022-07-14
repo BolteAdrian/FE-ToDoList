@@ -1,10 +1,12 @@
 <div class="container">
     <h1>Secondary tasks</h1>
   
-    <a href="#" routerLink="/childs/create/" class="btn btn-success"
-      >Add new</a
-    >
-  
+    <a href="#" routerLink="/task/index" class="btn btn-primary">Back</a>
+    <button class="btn btn-success" mat-button (click)="openDialog()">
+      Add new task
+    </button>
+
+
     <table class="table table-bordered">
       <thead class="black white-text">
         <tr>
@@ -34,18 +36,21 @@
           <td>{{ task.priority }}</td>
           <td>{{ task.assignedUser }}</td>
           <td>
-            <a
-              href="#"
-              [routerLink]="['/task-secondary/', task.id, 'view']"
-              class="btn btn-info"
-              >View</a
-            >
-            <a
-              href="#"
-              [routerLink]="['/task-secondary/', task.id, 'edit']"
-              class="btn btn-primary"
-              >Edit</a
-            >
+            <button
+            mat-button
+            (click)="openDetailsDialog(task)"
+            class="btn btn-info"
+          >
+            Details
+          </button>
+            <button
+            mat-button
+            (click)="openEditDialog(task)"
+            class="btn btn-primary"
+          >
+            Edit
+          </button>
+          
             <button
               type="button"
               (click)="deletePost(task.id)"

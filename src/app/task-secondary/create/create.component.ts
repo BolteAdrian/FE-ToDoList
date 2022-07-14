@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TaskSecondaryService } from '../task-secondary.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
@@ -15,7 +16,7 @@ export class CreateComponent implements OnInit {
   Created constructor
   --------------------------------------------
   --------------------------------------------*/
-  constructor(public taskSecondaryService: TaskSecondaryService, private router: Router) {}
+  constructor(public taskSecondaryService: TaskSecondaryService, private router: Router,private dialogRef: MatDialogRef<CreateComponent>) {}
 
   /**
    * Write code on Method
@@ -50,11 +51,19 @@ export class CreateComponent implements OnInit {
    *
    * @return response()
    */
+
+   closeDialog(){
+    this.dialogRef.close();
+  }
+
+
   submit() {
     console.log(this.form.value);
     this.taskSecondaryService.create(this.form.value).subscribe((res: any) => {
       console.log('Post created successfully!');
-      this.router.navigateByUrl('task/index');
+      this.form.reset();
+      this.dialogRef.close();
+      window. location. reload();
     });
   }
 }

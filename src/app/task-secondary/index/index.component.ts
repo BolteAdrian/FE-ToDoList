@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { TaskSecondaryService } from '../task-secondary.service';
 import { TaskSecondary } from '../task-secondary';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateComponent } from '../create/create.component';
+import { EditComponent } from '../edit/edit.component';
+import { ViewComponent } from '../view/view.component';
 
 @Component({
   selector: 'app-index',
@@ -20,7 +24,8 @@ export class IndexComponent implements OnInit {
   constructor(
     public taskSecondaryService: TaskSecondaryService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   /**
@@ -43,6 +48,30 @@ export class IndexComponent implements OnInit {
    *
    * @return response()
    */
+
+   openDialog() {
+    this.dialog.open(CreateComponent, {
+      width: '30%',
+      data:{
+        idPT:this.id,
+      }
+    });
+  }
+
+  
+  openDetailsDialog(task:any) {
+    this.dialog.open(ViewComponent, {
+      width: '30%',
+      data : task,
+    });
+  }
+  openEditDialog(task:any) {
+    this.dialog.open(EditComponent, {
+      width: '30%',
+      data : task,
+    });
+  }
+  
   deletePost(id: number) {
     this.taskSecondaryService.delete(id).subscribe((res) => {
       this.taskSecondary = this.taskSecondary.filter((item) => item.id !== id);

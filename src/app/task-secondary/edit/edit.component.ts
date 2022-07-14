@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { TaskSecondaryService } from '../task-secondary.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TaskSecondary } from '../task-secondary';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-edit',
@@ -22,7 +23,9 @@ export class EditComponent implements OnInit {
   constructor(
     public taskSecondaryService: TaskSecondaryService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private dialogRef: MatDialogRef<EditComponent>,
+    @Inject(MAT_DIALOG_DATA) public editData: any
   ) {}
 
   /**
@@ -47,6 +50,11 @@ export class EditComponent implements OnInit {
       priority: new FormControl(1, [Validators.required]),
       assignedUser: new FormControl('', [Validators.required]),
     });
+
+    this.id = this.editData.id;
+    this.taskSecondaryService.find(this.id).subscribe((data: TaskSecondary) => {
+      this.taskSecondary = data;
+    });
   }
 
   /**
@@ -63,13 +71,19 @@ export class EditComponent implements OnInit {
    *
    * @return response()
    */
+  closeDialog() {
+    this.dialogRef.close();
+  }
+
   submit() {
     console.log(this.form.value);
     this.taskSecondaryService
       .update(this.id, this.form.value)
       .subscribe((res: any) => {
         console.log('Post updated successfully!');
-        this.router.navigateByUrl('task/index');
+        this.form.reset();
+        this.dialogRef.close();
+        window.location.reload();
       });
   }
 }
