@@ -1,66 +1,88 @@
 <div class="container">
-    <h1>Secondary tasks</h1>
-  
-    <a href="#" routerLink="/task/index" class="btn btn-primary">Back</a>
-    <button class="btn btn-success" mat-button (click)="openDialog()">
-      Add new task
-    </button>
+  <div class="table-responsive user-list"></div>
+  <br /><br />
+  <h1>Secondary tasks</h1>
 
+  <button class="btn btn-success" mat-button (click)="openDialog()">
+    Add new task
+  </button>
 
-    <table class="table table-bordered">
-      <thead class="black white-text">
-        <tr>
-          <td>Id</td>
-          <td>Principal task id</td>
-          <td>Title</td>
-          <td>Objective</td>
-          <td>Description</td>
-          <td>StartDate</td>
-          <td>EndDate</td>
-          <td>Checked</td>
-          <td>Priority</td>
-          <td>AssignedUser</td>
-          <th width="220px">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let task of taskSecondary">
-          <td>{{ task.id }}</td>
-          <td>{{ task.principalTaskId }}</td>
-          <td>{{ task.title }}</td>
-          <td>{{ task.objective }}</td>
-          <td>{{ task.description }}</td>
-          <td>{{ task.startDate }}</td>
-          <td>{{ task.endDate }}</td>
-          <td>{{ task.checked }}</td>
-          <td>{{ task.priority }}</td>
-          <td>{{ task.assignedUser }}</td>
-          <td>
-            <button
-            mat-button
-            (click)="openDetailsDialog(task)"
-            class="btn btn-info"
-          >
-            Details
-          </button>
-            <button
-            mat-button
-            (click)="openEditDialog(task)"
-            class="btn btn-primary"
-          >
-            Edit
-          </button>
-          
-            <button
-              type="button"
-              (click)="deletePost(task.id)"
-              class="btn btn-danger"
-            >
-              Delete
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
+  <button class="btn btn-info" mat-button (click)="backClicked()">Back</button>
+
+  <br /><br />
+
+  <table
+      class="table table-bordered"
+      cdkDropList
+      (cdkDropListDropped)="onDrop($event)"
+    >
+    <tr
+      *ngFor="let task of taskSecondary"
+      cdkDrag
+      cdkDragLockAxis="y"
+      [ngStyle]="{
+        'background-color': task.checked === true ? 'green' : 'red'
+      }"
+    >
+      <td
+        [ngStyle]="{
+          'background-color': 'white'
+        }"
+      >
+        <input
+          type="checkbox"
+          [(ngModel)]="task.checked"
+          (change)="onCheckboxChange(task)"
+        />
+      </td>
+
+      <div class="drag-handle">
+        <ng-container [ngTemplateOutlet]="dragHandleTmpl"> </ng-container>
+
+        <p>{{ task.title }}</p>
+      </div>
+      <td>{{ task.objective }}</td>
+      <td>{{ task.description }}</td>
+      <td>{{ task.endDate }}</td>
+      <td>{{ task.assignedUser }}</td>
+      <td
+        [ngStyle]="{
+          'background-color': 'white'
+        }"
+      >
+        <button mat-button (click)="openDetailsDialog(task)">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <button mat-button (click)="openEditDialog(task)">
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button
+          mat-fab
+          color="primary"
+          (click)="deletePost(task.id)"
+          aria-label="Example icon button with a delete icon"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<ng-template #dragHandleTmpl>
+  <svg
+    class="bi bi-list handle"
+    width="1em"
+    height="1em"
+    viewBox="0 0 16 16"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      fill-rule="evenodd"
+      d="M2.5 11.5A.5.5 0 013 11h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4A.5.5 0 013 7h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4A.5.5 0 013 3h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5z"
+      clip-rule="evenodd"
+    />
+  </svg>
+</ng-template>

@@ -35,7 +35,8 @@ export class CreateComponent implements OnInit {
    */
   ngOnInit(): void {
     const str = location.href;
-    const last = str.charAt(str.length - 1);
+    const res = str.split('/');
+    const last = res[res.length - 1];
 
     this.form = new FormGroup({
       title: new FormControl('', [Validators.required]),

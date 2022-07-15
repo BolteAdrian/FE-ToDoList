@@ -5,11 +5,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateComponent } from '../create/create.component';
 import { EditComponent } from '../edit/edit.component';
 import { ViewComponent } from '../view/view.component';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
-  styleUrls: ['./index.component.css'],
+  styleUrls: ['./index.component.scss'],
+
 })
 export class IndexComponent implements OnInit {
   tasks: Task[] = [];
@@ -26,6 +28,9 @@ export class IndexComponent implements OnInit {
    *
    * @return response()
    */
+
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+
   ngOnInit(): void {
     this.taskService.getAll().subscribe((data: Task[]) => {
       this.tasks = data;
@@ -39,30 +44,59 @@ export class IndexComponent implements OnInit {
    * @return response()
    */
 
+  onDrop(event: CdkDragDrop<string[]>) {
+    
+    moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
+    this.tasks.forEach((task, idx) => {
+      task.id = idx + 1;
+    });
+  }
+
+  onCheckboxChange(tasks: any) {
+    console.log(tasks);
+
+    if (tasks.checked == true) {
+      tasks.checked == false;
+    } else {
+      tasks.checked == true;
+    }
+
+    this.taskService.update(tasks.id, tasks).subscribe((res: any) => {
+      console.log('Post updated successfully!');
+      window.location.reload();
+    });
+  }
+
   openDialog() {
     this.dialog.open(CreateComponent, {
       width: '30%',
     });
   }
 
-  openEditDialog(task:any) {
+  openEditDialog(task: any) {
     this.dialog.open(EditComponent, {
       width: '30%',
-      data : task,
+      data: task,
     });
   }
 
-  openDetailsDialog(task:any) {
+  openDetailsDialog(task: any) {
     this.dialog.open(ViewComponent, {
       width: '30%',
-      data : task,
+      data: task,
     });
   }
 
   deletePost(id: number) {
-    this.taskService.delete(id).subscribe((res) => {
-      this.tasks = this.tasks.filter((item) => item.id !== id);
-      console.log('Post deleted successfully!');
-    });
+    var del = confirm('Are you sure you want to delete this task?');
+    if (del == true) {
+      alert('record deleted');
+      this.taskService.delete(id).subscribe((res) => {
+        this.tasks = this.tasks.filter((item) => item.id !== id);
+        console.log('Post deleted successfully!');
+      });
+    } else {
+      alert('Record Not Deleted');
+    }
   }
 }

@@ -1,51 +1,87 @@
 <div class="container">
-  <h1>To do list</h1>
+  <div class="table-responsive user-list">
+    <br /><br />
+    <h1>To do list</h1>
 
-  <button class="btn btn-success" mat-button (click)="openDialog()">
-    Add new task
-  </button>
+    <button class="btn btn-success" mat-button (click)="openDialog()">
+      Add new task
+    </button>
+    <br /><br />
 
-  <table class="table table-bordered">
-    <tr
-      *ngFor="let task of tasks"
-      [ngStyle]="{
-        'background-color': task.checked === true ? 'green' : 'red'
-      }"
+    <table
+      class="table table-bordered"
+      cdkDropList
+      (cdkDropListDropped)="onDrop($event)"
     >
-      <td>
-        <a href="#" routerLink="/task-secondary/{{ task.id }}">
-          <p>{{ task.title }}</p></a
+      <tr
+        *ngFor="let task of tasks"
+        cdkDrag
+        cdkDragLockAxis="y"
+        [ngStyle]="{
+          'background-color': task.checked === true ? 'green' : 'red'
+        }"
+      >
+        <td
+          [ngStyle]="{
+            'background-color': 'white'
+          }"
         >
-      </td>
-      <td>{{ task.objective }}</td>
-      <td>{{ task.description }}</td>
-      <td>{{ task.startDate }}</td>
-      <td>{{ task.endDate }}</td>
-      <td>{{ task.assignedUser }}</td>
-      <td>
-        <button
-          mat-button
-          (click)="openDetailsDialog(task)"
-          class="btn btn-info"
-        >
-          Details
-        </button>
-        <button
-          mat-button
-          (click)="openEditDialog(task)"
-          class="btn btn-primary"
-        >
-          Edit
-        </button>
+          <input
+            type="checkbox"
+            [(ngModel)]="task.checked"
+            (change)="onCheckboxChange(task)"
+          />
+        </td>
 
-        <button
-          type="button"
-          (click)="deletePost(task.id)"
-          class="btn btn-danger"
+        <div class="drag-handle">
+          <ng-container [ngTemplateOutlet]="dragHandleTmpl"> </ng-container>
+          <a href="#" routerLink="/task-secondary/{{ task.id }}">
+            <p>{{ task.title }}</p></a
+          >
+        </div>
+
+        <td>{{ task.objective }}</td>
+        <td>{{ task.description }}</td>
+        <td>{{ task.endDate }}</td>
+        <td>{{ task.assignedUser }}</td>
+        <td
+          [ngStyle]="{
+            'background-color': 'white'
+          }"
         >
-          Delete
-        </button>
-      </td>
-    </tr>
-  </table>
+          <button mat-button (click)="openDetailsDialog(task)">
+            <mat-icon>menu</mat-icon>
+          </button>
+          <button mat-button (click)="openEditDialog(task)">
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <button
+            mat-fab
+            color="primary"
+            (click)="deletePost(task.id)"
+            aria-label="Example icon button with a delete icon"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <ng-template #dragHandleTmpl>
+    <svg
+      class="bi bi-list handle"
+      width="1em"
+      height="1em"
+      viewBox="0 0 16 16"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M2.5 11.5A.5.5 0 013 11h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4A.5.5 0 013 7h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4A.5.5 0 013 3h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5z"
+        clip-rule="evenodd"
+      />
+    </svg>
+  </ng-template>
 </div>

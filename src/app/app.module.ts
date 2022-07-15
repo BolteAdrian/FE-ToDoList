@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
+import {MatListModule} from '@angular/material/list';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -15,6 +15,10 @@ import {MatInputModule} from '@angular/material/input';
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatIconModule} from '@angular/material/icon';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { DragDropModule } from "@angular/cdk/drag-drop";
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,6 +39,10 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatButtonModule,
     MatInputModule,
     MatPaginatorModule,
+    MatListModule,
+    MatIconModule,
+    MatCheckboxModule,
+    DragDropModule,
     
   ],
   providers: [],
