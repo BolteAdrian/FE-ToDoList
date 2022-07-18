@@ -34,13 +34,13 @@
         </td>
 
         <td>
-        <div class="drag-handle">
-          <ng-container [ngTemplateOutlet]="dragHandleTmpl"> </ng-container>
-          <a href="#" routerLink="/task-secondary/{{ task.id }}">
-            <p>{{ task.title }}</p></a
-          >
-        </div>
-      </td>
+          <div class="drag-handle">
+            <ng-container [ngTemplateOutlet]="dragHandleTmpl"> </ng-container>
+            <a href="#" routerLink="/task-secondary/{{ task.id }}">
+              <p>{{ task.title }}</p></a
+            >
+          </div>
+        </td>
         <td>{{ task.objective }}</td>
         <td>{{ task.description }}</td>
         <td>{{ task.endDate }}</td>
