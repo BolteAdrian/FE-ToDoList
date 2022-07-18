@@ -1,5 +1,5 @@
-import { Component, inject, Inject, INJECTOR, OnInit } from '@angular/core';
-import { TaskService } from '../task.service';\
+import { Component, Inject, INJECTOR, OnInit } from '@angular/core';
+import { TaskService } from '../task.service';
 import { Task } from '../task';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
