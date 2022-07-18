@@ -14,7 +14,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
 @NgModule({
   declarations: [IndexComponent, ViewComponent, CreateComponent, EditComponent],
   imports: [

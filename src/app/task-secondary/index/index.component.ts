@@ -56,16 +56,16 @@ export class IndexComponent implements OnInit {
   /** The label for the checkbox on the passed row */
   /** The label for the checkbox on the passed row */
 
-
   onDrop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.taskSecondary, event.previousIndex, event.currentIndex);
+    moveItemInArray(
+      this.taskSecondary,
+      event.previousIndex,
+      event.currentIndex
+    );
     this.taskSecondary.forEach((task, idx) => {
       task.id = idx + 1;
     });
   }
-
-
-
 
   onCheckboxChange(taskSecondary: any) {
     console.log(taskSecondary);

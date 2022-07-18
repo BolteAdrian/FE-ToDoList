@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../task.service';
-import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 @Component({
@@ -10,14 +9,16 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class CreateComponent implements OnInit {
   form!: FormGroup;
-  
 
   /*------------------------------------------
   --------------------------------------------
   Created constructor
   --------------------------------------------
   --------------------------------------------*/
-  constructor(public taskService: TaskService, private router: Router,private dialogRef: MatDialogRef<CreateComponent>) {}
+  constructor(
+    public taskService: TaskService,
+    private dialogRef: MatDialogRef<CreateComponent>
+  ) {}
 
   /**
    * Write code on Method
@@ -52,7 +53,7 @@ export class CreateComponent implements OnInit {
    * @return response()
    */
 
-   closeDialog(){
+  closeDialog() {
     this.dialogRef.close();
   }
 
@@ -62,7 +63,7 @@ export class CreateComponent implements OnInit {
       console.log('Post created successfully!');
       this.form.reset();
       this.dialogRef.close();
-      window. location. reload();
+      window.location.reload();
     });
   }
 }

@@ -11,7 +11,6 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
   selector: 'app-index',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss'],
-
 })
 export class IndexComponent implements OnInit {
   tasks: Task[] = [];
@@ -47,11 +46,13 @@ export class IndexComponent implements OnInit {
   onDrop(event: CdkDragDrop<string[]>) {
     console.log(event);
     moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
-    this.tasks[event.currentIndex].priority=this.tasks[event.currentIndex+1].priority+1;
-  console.log("aici");
-    this.taskService.update(this.tasks[event.currentIndex].id, this.tasks[event.currentIndex]).subscribe((res: any) => {
-      console.log('Post updated successfully!');
-    });
+    this.tasks[event.currentIndex].priority =
+      this.tasks[event.currentIndex + 1].priority + 1;
+    this.taskService
+      .update(this.tasks[event.currentIndex].id, this.tasks[event.currentIndex])
+      .subscribe((res: any) => {
+        console.log('Post updated successfully!');
+      });
   }
 
   onCheckboxChange(tasks: any) {

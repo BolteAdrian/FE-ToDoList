@@ -24,15 +24,14 @@ tr {
   padding-bottom: 10em;
 }
 
-td:hover {background-color: rgb(204, 205, 204);
+td:hover {
+  background-color: rgb(204, 205, 204);
 }
 
-
-a{
-    text-decoration:none;
-    text-align:center;
-    color: white;
-   
+a {
+  text-decoration: none;
+  text-align: center;
+  color: white;
 }
 
 /* Animate items as they're being sorted. */
@@ -43,8 +42,8 @@ a{
 .cdk-drag-preview {
   box-sizing: border-box;
   border-radius: 4px;
-  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14),
-    0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
   padding: 4px;
 }
 
@@ -57,4 +56,3 @@ a{
     margin-right: 5px;
   }
 }
-

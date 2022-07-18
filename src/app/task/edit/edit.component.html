@@ -1,7 +1,6 @@
 <div class="container">
   <h1>Update Post</h1>
 
-
   <form [formGroup]="form" (ngSubmit)="submit()">
     <div class="form-group">
       <label for="title">Title:</label>
@@ -71,7 +70,6 @@
         id="startDate"
         type="date"
         [(ngModel)]="task.startDate"
-        
       />
 
       <div
@@ -91,7 +89,6 @@
         id="endDate"
         type="date"
         [(ngModel)]="task.endDate"
-        
       />
 
       <div
@@ -111,7 +108,6 @@
         id="checked"
         type="checkbox"
         [(ngModel)]="task.checked"
-       
       />
 
       <div
@@ -169,7 +165,12 @@
         </div>
       </div>
     </div>
-    <button type="button"class="btn btn-danger" md-raised-button (click)="closeDialog()">
+    <button
+      type="button"
+      class="btn btn-danger"
+      md-raised-button
+      (click)="closeDialog()"
+    >
       Cancel
     </button>
     <button class="btn btn-primary" type="submit" [disabled]="!form.valid">

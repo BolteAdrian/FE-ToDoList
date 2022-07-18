@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
 import { TaskSecondary } from './task-secondary';
 import { environment } from 'src/environments/environment';
 
@@ -25,7 +24,7 @@ export class TaskSecondaryService {
   }
 
   create(task: any): Observable<TaskSecondary> {
-    console.log("aici");
+    console.log('aici');
     return this.httpClient
       .post<TaskSecondary>(
         environment.BE_url + '/api/SecondaryTask/',
