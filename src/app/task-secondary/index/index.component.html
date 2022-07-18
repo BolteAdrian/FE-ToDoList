@@ -12,10 +12,10 @@
   <br /><br />
 
   <table
-      class="table table-bordered"
-      cdkDropList
-      (cdkDropListDropped)="onDrop($event)"
-    >
+    class="table table-bordered"
+    cdkDropList
+    (cdkDropListDropped)="onDrop($event)"
+  >
     <tr
       *ngFor="let task of taskSecondary"
       cdkDrag
@@ -35,12 +35,13 @@
           (change)="onCheckboxChange(task)"
         />
       </td>
+      <td>
+        <div class="drag-handle">
+          <ng-container [ngTemplateOutlet]="dragHandleTmpl"> </ng-container>
 
-      <div class="drag-handle">
-        <ng-container [ngTemplateOutlet]="dragHandleTmpl"> </ng-container>
-
-        <p>{{ task.title }}</p>
-      </div>
+          {{ task.title }}
+        </div>
+      </td>
       <td>{{ task.objective }}</td>
       <td>{{ task.description }}</td>
       <td>{{ task.endDate }}</td>

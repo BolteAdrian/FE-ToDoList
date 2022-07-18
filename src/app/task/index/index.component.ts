@@ -45,10 +45,12 @@ export class IndexComponent implements OnInit {
    */
 
   onDrop(event: CdkDragDrop<string[]>) {
-    
+    console.log(event);
     moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
-    this.tasks.forEach((task, idx) => {
-      task.id = idx + 1;
+    this.tasks[event.currentIndex].priority=this.tasks[event.currentIndex+1].priority+1;
+  console.log("aici");
+    this.taskService.update(this.tasks[event.currentIndex].id, this.tasks[event.currentIndex]).subscribe((res: any) => {
+      console.log('Post updated successfully!');
     });
   }
 
