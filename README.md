@@ -6,6 +6,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
+LINK to backend: https://github.com/BolteAdrian/BE-ToDoList
+
 Home page with principal tasks
 ![2022-07-15 (1)](https://user-images.githubusercontent.com/87446991/179234025-eda41a70-e6ad-47a6-b4e3-fc19ef28841e.png)
 
